@@ -23,26 +23,26 @@ pipeline {
             steps {
                 echo "Hello Java Express"
                 sh 'ls'
-                sh 'docker build -t  meetkanakia5/productservice:9a72f7bf7483 .'
+                sh 'docker build -t  anvbhaskar/docker_jenkins_springboot:${BUILD_NUMBER} .'
             }
         }
         stage('Docker Login'){
 
             steps {
                  withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh "docker login -u meetkanakia5 -p ENErique@1"
+                    sh "docker login -u anvbhaskar -p ${Dockerpwd}"
                 }
             }
         }
         stage('Docker Push'){
             steps {
-                sh 'docker push meetkanakia5/productservice:9a72f7bf7483'
+                sh 'docker push anvbhaskar/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
 
-                sh 'docker run -itd -p  8081:8080 meetkanakia5/productservice:9a72f7bf7483'
+                sh 'docker run -itd -p  8081:8080 anvbhaskar/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
         stage('Archving') {
