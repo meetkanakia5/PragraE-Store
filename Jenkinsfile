@@ -10,9 +10,9 @@ pipeline {
                 sh "mvn clean compile"
             }
         }
-        stage('Build') {
+        stage('Build Code') {
             steps {
-                echo 'Building..'
+                sh "mvn clean install"
             }
         }
         stage('Test') {
