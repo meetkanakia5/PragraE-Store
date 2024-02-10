@@ -1,8 +1,11 @@
 pipeline {
     agent any
+    environment {
+        PATH= "/usr/bin:$PATH"
+    }
 
     stages {
-        stage('Compile and clean') {
+        stage('Clone Code') {
             steps {
                 sh "mvn clean compile"
             }
